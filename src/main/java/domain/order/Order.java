@@ -1,10 +1,13 @@
-package domain;
+package domain.order;
+
+import domain.input.Quantity;
+import domain.order.menu.Menu;
 
 public class Order {
     private final Menu menu;
-    private final int quantity;
+    private final Quantity quantity;
 
-    public Order(Menu menu, int quantity) {
+    public Order(Menu menu, Quantity quantity) {
         this.menu = menu;
         this.quantity = quantity;
     }
@@ -13,7 +16,7 @@ public class Order {
         return menu;
     }
 
-    public int getQuantity() {
+    public Quantity getQuantity() {
         return quantity;
     }
 }

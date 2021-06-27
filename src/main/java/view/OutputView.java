@@ -1,9 +1,9 @@
 package view;
 
-import domain.Menu;
-import domain.Order;
-import domain.Table;
-import service.TableOrders;
+import domain.order.menu.Menu;
+import domain.order.Order;
+import domain.table.Table;
+import domain.tableorders.TableOrders;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class OutputView {
         System.out.println("메뉴  수량  금액");
         for (Order order : orders) {
             String menuName = order.getMenu().getName();
-            int quantity = order.getQuantity();
+            int quantity = Integer.parseInt(order.getQuantity().toString());
             int amount = order.getMenu().getPrice() * quantity;
             System.out.println(menuName + "  " + quantity + "  " + amount);
         }

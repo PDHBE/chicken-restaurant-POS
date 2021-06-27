@@ -1,7 +1,8 @@
 package service;
 
-import domain.Category;
-import domain.Order;
+import domain.input.PaymentType;
+import domain.order.menu.category.Category;
+import domain.order.Order;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class PaymentCalculator {
     private static int getPayment(List<Order> orders) {
         int payment = 0;
         for (Order order : orders) {
-            payment += order.getMenu().getPrice() * order.getQuantity();
+            payment += order.getMenu().getPrice() * Integer.parseInt(order.getQuantity().toString());
         }
         return payment;
     }
@@ -37,7 +38,7 @@ public class PaymentCalculator {
         int sumOfChickenMenus = 0;
         for (Order order : orders) {
             if (order.getMenu().getCategory() == Category.CHICKEN) {
-                sumOfChickenMenus += order.getQuantity();
+                sumOfChickenMenus += Integer.parseInt(order.getQuantity().toString());
             }
         }
         return sumOfChickenMenus;

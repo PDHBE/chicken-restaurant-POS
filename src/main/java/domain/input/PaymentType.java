@@ -1,4 +1,4 @@
-package service;
+package domain.input;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,8 +1,13 @@
-import service.FunctionNumber;
+import domain.input.Quantity;
+import domain.order.menu.Menu;
+import domain.order.menu.MenuRepository;
+import domain.order.Order;
+import domain.table.Table;
+import domain.table.TableRepository;
+import domain.input.FunctionNumber;
 import service.PaymentCalculator;
-import service.PaymentType;
-import service.TableOrders;
-import domain.*;
+import domain.input.PaymentType;
+import domain.tableorders.TableOrders;
 import view.InputView;
 import view.OutputView;
 
@@ -81,10 +86,15 @@ public class Application {
     private static void register() {
         Table table = selectTableUntilValid();
         Menu menu = selectMenuUntilValid();
+        Quantity quantity = inputQuantityUntilValid();
+
+        TableOrders.register(table, menu, quantity);
+    }
+
+    private static Quantity inputQuantityUntilValid() {
         while (true) {
             try {
-                TableOrders.register(table, menu, InputView.inputQuantity());
-                return;
+                return new Quantity(InputView.inputQuantity());
             } catch (IllegalArgumentException illegalArgumentException) {
                 System.out.println(illegalArgumentException.getMessage());
                 System.out.println("다시 입력해주세요.");

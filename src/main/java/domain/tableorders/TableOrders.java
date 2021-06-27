@@ -1,9 +1,10 @@
-package service;
+package domain.tableorders;
 
-import domain.Menu;
-import domain.Order;
-import domain.Table;
-import domain.TableRepository;
+import domain.input.Quantity;
+import domain.order.menu.Menu;
+import domain.order.Order;
+import domain.table.Table;
+import domain.table.TableRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TableOrders {
-    private static final int QUANTITY_LIMIT = 99;
     private static final Map<Table, List<Order>> tableOrders = new HashMap<>();
 
     static {
@@ -20,10 +20,7 @@ public class TableOrders {
         }
     }
 
-    public static void register(Table table, Menu menu, int quantity) throws IllegalArgumentException {
-        if (quantity > QUANTITY_LIMIT) {
-            throw new IllegalArgumentException("수량은 최대 " + QUANTITY_LIMIT + "개 까지 가능합니다.");
-        }
+    public static void register(Table table, Menu menu, Quantity quantity) throws IllegalArgumentException {
         tableOrders.get(table).add(new Order(menu, quantity));
     }
 
