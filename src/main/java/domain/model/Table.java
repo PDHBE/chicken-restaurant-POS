@@ -1,4 +1,4 @@
-package domain.table;
+package domain.model;
 
 public class Table {
     private final int number;

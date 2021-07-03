@@ -1,6 +1,4 @@
-package domain.order.menu;
-
-import domain.order.menu.category.Category;
+package domain.model;
 
 public class Menu {
     private final int number;

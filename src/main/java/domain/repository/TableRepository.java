@@ -1,4 +1,7 @@
-package domain.table;
+package domain.repository;
+
+import ui.controller.exception.NoTableException;
+import domain.model.Table;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,12 +23,12 @@ public class TableRepository {
         return Collections.unmodifiableList(tables);
     }
 
-    public static Table findByNumber(int number) throws IllegalArgumentException{
+    public static Table findByNumber(int number) {
         for (Table table : tables) {
             if(table.getNumber() == number){
                 return table;
             }
         }
-        throw new IllegalArgumentException("존재하지 않는 테이블입니다.");
+        throw new NoTableException();
     }
 }

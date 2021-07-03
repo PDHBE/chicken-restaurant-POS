@@ -1,6 +1,8 @@
-package domain.order.menu;
+package domain.repository;
 
-import domain.order.menu.category.Category;
+import ui.controller.exception.NoMenuException;
+import domain.model.Category;
+import domain.model.Menu;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,12 +26,12 @@ public class MenuRepository {
         return Collections.unmodifiableList(menus);
     }
 
-    public static Menu findByNumber(int number) throws IllegalArgumentException{
+    public static Menu findByNumber(int number) {
         for (Menu menu : menus) {
             if(menu.getNumber() == number){
                 return menu;
             }
         }
-        throw new IllegalArgumentException("존재하지 않는 메뉴입니다.");
+        throw new NoMenuException();
     }
 }
