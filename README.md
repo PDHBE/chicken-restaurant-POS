@@ -108,7 +108,7 @@ PayCalculationService : 주문 목록과 결제 수단을 받아, 최종 결제 
 
 - 최초엔 이를 구현하기 위하여 view 계층에서 domain 계층의 TableRepository에 접근하여 모든 테이블 목록을 가져왔고, OrderRepository에 접근하여 주문이 있는 테이블 목록을 가져왔다.
 
-- 하지만 이렇게 되면 view 계층에서 곧바로 DB에 접근하는 셈이 되어버린 것이다. 따라서 DB(repository)에 접근할 수 있는 계층인 controller 계층이 DB에 접근하여 조회한 결과를 view에 전달하는 식으로 변경하였다.
+- 하지만 이렇게 되면 view 계층에서 곧바로 DB에 접근하는 셈이 되어버린 것이다. 따라서, controller 계층에서 DB에 접근하여 조회한 결과를 view에 전달하는 식으로 변경하였다.
 
 - ( 원래 도메인 DB(repository)에 접근하는 계층은 응용(application) 계층이지만, 트랜잭션 처리가 필요없는 단순 조회의 경우 그 앞 단계 계층인 controller 계층에서 수행하도록 하는 것이 효율적이다. )
 
