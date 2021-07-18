@@ -1,12 +1,96 @@
-# 요구사항
+# 소개
 
-<img width="818" alt="스크린샷 2021-07-03 오후 1 59 31" src="https://user-images.githubusercontent.com/82703938/124346963-ad529e80-dc1c-11eb-83e8-c604da614c87.png">
-<img width="970" alt="스크린샷 2021-07-03 오후 2 00 01" src="https://user-images.githubusercontent.com/82703938/124346974-b3e11600-dc1c-11eb-9c4e-06db3b17587c.png">
+<img width="309" alt="스크린샷 2021-07-17 오후 9 10 26" src="https://user-images.githubusercontent.com/82703938/126036441-13ef190e-14d4-432c-b6ed-f21523bebd8c.png">
+
+- 치킨집에서 사용되는 간단한 POS 기를 구현한 자바 프로그램
+
+- 주요 기능
+
+	- 주문 등록
+
+		- 변경 가능한 테이블과 메뉴가 존재하며, 단일 메뉴로는 최대 99개까지 주문이 가능하다.
+
+		- 주문이 등록된 테이블은 따로 표시가 되어 구분이 가능하다.
+
+	- 결제
+
+		- 치킨 메뉴 10개당 10000원씩 할인된다.
+
+		- 현금 결제시 5% 할인된다.
+
+		- 중복 할인이 가능하다.
+
+	- 프로그램 종료
 
 # 구조
 
 <img width="760" alt="스크린샷 2021-07-03 오후 4 58 20" src="https://user-images.githubusercontent.com/82703938/124347473-f821e580-dc1f-11eb-8cba-315d19076312.png">
-<img width="320" alt="스크린샷 2021-07-03 오후 5 00 53" src="https://user-images.githubusercontent.com/82703938/124347569-48994300-dc20-11eb-9bcf-91c93d5e6a76.png">
+<img width="381" alt="스크린샷 2021-07-18 오후 12 47 22" src="https://user-images.githubusercontent.com/82703938/126055013-d1d60e9b-f489-40c9-b702-7b997194ecef.png">
+
+
+DDD(도메인 주도 설계) 를 참고하여 ui(표현) 계층, application(응용) 계층, domain 계층으로 분리하였습니다.
+
+## ui(표현) 계층
+
+### view 
+
+MainView : 메인 화면을 출력하고, 유효한 기능 번호가 입력될때까지 반복하는 역할
+
+RegisterView : 테이블과 메뉴 목록을 출력하고 테이블 번호, 메뉴 번호, 수량 차례대로 유효한 값이 입력될때까지 반복하는 역할
+
+PayView : 테이블 목록을 출력하고 테이블 번호, 결제수단 번호 차례대로 유효한 값이 입력될때까지 반복하는 역할
+
+PayResultView : 주문 내역과 최종 결제 금액을 출력하는 역할
+
+### controller
+
+OrderController : 요청에 맞는 OrderService 인터페이스를 호출하고, 그 결과를 View 에 전달하는 역할
+
+NoFunctionException : 존재하지 않는 기능 번호 예외
+
+NoTableException : 존재하지 않는 테이블 번호 예외
+
+NoMenuException : 존재하지 않는 메뉴 번호 예외
+
+QuantityLimitOverException : 지정한 수량 제한을 넘을 경우의 예외
+
+NoOrderException : 테이블에 등록된 메뉴가 존재하지 않는 경우의 예외
+
+NoPaymentTypeException : 존재하지 않는 결제 수단 번호 예외
+
+## application(응용) 계층
+
+OrderService : OrderRepository 에 접근하여 Order 도메인 엔티티를 생성, 조회하고 도메인 서비스를 호출하는 역할
+
+## domain 계층
+
+### model
+
+FunctionNumber : 기능 번호 Enum Class
+
+Table : 테이블 Vo
+
+Menu : 메뉴 Vo
+
+Category : 메뉴의 카테고리 Enum Class
+
+Quantity : 수량 제한 검증 로직을 가지는 수량 엔티티
+
+Order : Order 애그리거트 루트 엔티티
+
+PaymentType : 결제 수단 Enum Class
+
+### repository
+
+TableRepository : 테이블 DB 에 접근하는 Repository
+
+MenuRepository : 메뉴 DB 에 접근하는 Repository 
+
+OrderRepository : 주문 DB 에 접근하는 Repository
+
+### service
+
+PayCalculationService : 주문 목록과 결제 수단을 받아, 최종 결제 금액을 계산하는 도메인 서비스 
 
 # 이슈
 
